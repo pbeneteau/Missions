@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>994352175358-oo31rsnctt8989pkpqm3ghutgolb7p9f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.994352175358-oo31rsnctt8989pkpqm3ghutgolb7p9f</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAFctigy_78VQ857WBU9EKuc-3dNycV2ZU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>994352175358</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tastyapp.missions</string>
+	<key>PROJECT_ID</key>
+	<string>missions-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>missions-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:994352175358:ios:ac1c276e902931dd</string>
+	<key>DATABASE_URL</key>
+	<string>https://missions-app.firebaseio.com</string>
+</dict>
+</plist>
