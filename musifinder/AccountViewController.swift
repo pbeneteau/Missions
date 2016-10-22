@@ -45,8 +45,7 @@ class AccountViewController: UIViewController{
             ref.child("user_profile").child(user.uid).observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if !snapshot.exists() { return }
-                
-                //print(snapshot)
+        
                 
                 if let userName = snapshot.value!["name"] as? String {
                     print(userName)

@@ -21,13 +21,13 @@ class GUserCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
         let groupName = userLabel.text
+        
         ref.child("user_groups").child(groupName!).child("members").observeEventType(.Value, withBlock: {
             snapshot in
             
            self.membersCount = snapshot.value!.count
-           print(self.membersCount)
-            
            self.userCount?.text = "\(self.membersCount)"
             
         })

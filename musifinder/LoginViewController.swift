@@ -18,19 +18,19 @@ import Firebase
 class LoginViewController: UIViewController, UIViewControllerTransitioningDelegate {
     
     @IBOutlet weak var signInViewButton: UIButton!
-    @IBOutlet weak var newAccountViewButton: UIButton!
+
    
     let customPresentAnimationController = CustomPresentAnimationController()
     
     override func viewDidLoad() {
-        if let user = FIRAuth.auth()?.currentUser  {
+        if (FIRAuth.auth()?.currentUser) != nil  {
             print("user already logged in")
             Helper.helper.switchToNavigationController()
             
         }
         self.signInViewButton.backgroundColor = UIColor.clearColor()
         self.signInViewButton.layer.borderWidth = 0.7
-        self.signInViewButton.layer.borderColor = UIColor(red:0.5, green:1.00, blue:1.00, alpha: 0.3).CGColor
+        self.signInViewButton.layer.borderColor = UIColor(red:0, green:0, blue: 0, alpha: 1).CGColor
     }
 
 

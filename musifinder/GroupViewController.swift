@@ -28,7 +28,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var softButton: UIButton!
     
     @IBOutlet weak var nameView: UIView!
-    @IBOutlet weak var foundNameLabel: UILabel!
+    @IBOutlet weak var nameAvailabilityLabel: UILabel!
+    @IBOutlet weak var nameNextButton: UIButton!
     
     @IBOutlet weak var playerView: UIView!
     
@@ -38,6 +39,8 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        nameNextButton.hidden = true
         nameView.hidden = false
         modeView.hidden = true
         playerView.hidden = true
@@ -75,7 +78,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 for user in userTab {
                     self.ref.child("user_groups").child("\(groupName)").child("members").child("\(userIDAdd)").setValue(user.name)
                     self.ref.child("user_profile").child(userIDAdd).child("groups").child(groupName).setValue(groupID)
-                    print("Extra user \(user.name) added successfuly!")
+                    print("The user \(user.name) has been added successfuly to the group!")
                 }
             }
             
@@ -95,7 +98,7 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             if let userName = snapshot.value!["name"] as? String {
                 print(userName)
-                self.foundNameLabel.text = userName
+                
                 self.userNameAdd = userName
                 self.userIDAdd = self.userIDField.text
                 self.userIDField.text = ""
@@ -180,5 +183,71 @@ class GroupViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    @IBAction func dismiss(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
+    @IBAction func checkNameAction(sender: AnyObject) {
+        var groupNames = [String]()
+        ref.child("user_groups").observeEventType(.Value, withBlock: {
+            snapshot in
+            
+            for group in snapshot.children {
+             groupNames.append(group.key)
+            }
+            if groupNames.contains(self.groupNameField.text!) {
+                print("group name not available")
+                self.nameAvailabilityLabel.text = "Sorry. This group name is not available"
+                self.nameNextButton.hidden = true
+            } else {
+                print("group name available!")
+                self.nameAvailabilityLabel.text = "This group name is available!"
+                self.nameNextButton.hidden = false
+            }
+        })
+        
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+            else {
+                
+            }
+        }
+        
+    }
+    func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            if view.frame.origin.y != 0 {
+                self.view.frame.origin.y += keyboardSize.height
+            }
+            else {
+                
+            }
+        }
+    }
+    @IBAction func nameEdit(sender: AnyObject) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GroupViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        
+    }
+    @IBAction func dsd(sender: AnyObject) {
+        nameNextButton.hidden = true
+    }
+   
+    
+    func hideKeyboardWhenTappedAround() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(GroupViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+        
+    }
 }

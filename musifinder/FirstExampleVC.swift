@@ -19,7 +19,7 @@ class FirstExampleVC: UIViewController {
         automaticallyAdjustsScrollViewInsets = false
         
         // Initiation
-        let VCIDs = ["FirstVC", "SecondVC", "ThirdVC", "FourthVC", "FifthVC"]
+        let VCIDs = ["FirstVC",  "ThirdVC", "FourthVC",]
         let buttonImages = [
             UIImage(named:"HomeIcon.png")!,
             UIImage(named:"LocationIcon.png")!,

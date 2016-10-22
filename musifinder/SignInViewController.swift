@@ -12,7 +12,8 @@ import FirebaseAuth
 import FirebaseDatabase
 import FBSDKLoginKit
 import FBSDKCoreKit
-import Firebase
+import FirebaseStorage
+
 
 
 
@@ -22,17 +23,27 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
     
     
     @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var googleLoginButton: UIButton!
+    @IBOutlet weak var userProfilePic: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var activityView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityView.hidden = true
+        activityView.layer.cornerRadius = 10
+        activityView.clipsToBounds = true
+        
+        userNameLabel.text = ""
         facebookLoginButton!.delegate = self
         facebookLoginButton!.readPermissions = ["public_profile", "email", "user_friends"]
         
+        facebookLoginButton.layer.shadowColor = UIColor(red:0.00, green:0.00, blue:0.00, alpha:1.0).CGColor
+        facebookLoginButton.layer.shadowOpacity = 0.5
+        facebookLoginButton.layer.shadowOffset = CGSizeMake(0, 1)
+        facebookLoginButton.layer.shadowRadius = 1
+        facebookLoginButton.layer.shadowPath = UIBezierPath(rect: facebookLoginButton.bounds).CGPath
         
-        self.hideKeyboardWhenTappedAround()
         GIDSignIn.sharedInstance().clientID = "994352175358-oo31rsnctt8989pkpqm3ghutgolb7p9f.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().delegate = self
@@ -49,7 +60,7 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
         } else if (result.isCancelled){
             print("user canceled sign up")
         }
-        
+        activityView.hidden = false
         let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
         
         FIRAuth.auth()?.signInWithCredential(credential, completion: { (user, error) in
@@ -82,7 +93,49 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
                                  let downloadURL = metadata!.downloadURL
                                  self.ref.child("user_profile").child("\(user!.uid)/profile_pic_small").setValue(downloadURL()!.absoluteString)
                                  self.ref.child("user_profile").child("\(user!.uid)/name").setValue(user?.displayName)
+                                print("WELCOME")
+                                
+                                let userName: String = user!.displayName!
+                                self.userNameLabel.text = "Welcome, \(userName)"
+                                 
+                                    let profilePic = FBSDKGraphRequest(graphPath: "me/picture", parameters: ["height": 300, "width": 300, "redirect": false], HTTPMethod: "GET")
+                                    profilePic.startWithCompletionHandler({(connection, result, error) -> Void in
+                                        if error == nil {
+                                            let dictionary = result as? NSDictionary
+                                            let data = dictionary?.objectForKey("data")
+                                            let urlPic = (data?.objectForKey("url"))! as? String
+                                            
+                                            if let imageData = NSData(contentsOfURL: NSURL(string: urlPic!)!)
+                                            {
+                                                
+                                                let uploadTask = profilePicRef.putData(imageData, metadata: nil){
+                                                    metadata,error in
+                                                    if error == nil {
+                                                        let downloadURL = metadata!.downloadURL
+                                                    } else {
+                                                        print("error in downloading image")
+                                                    }
+                                                }
+                                                
+                                                self.userProfilePic.image = UIImage(data:imageData)
+                                                self.userProfilePic.layer.cornerRadius = self.userProfilePic.frame.size.width/2
+                                                self.userProfilePic.clipsToBounds = true
+                                                
+                                            }
+                                            
+                                        }
+                                    })
+                                    
+                                
+                                 self.activityView.hidden = true
+                                let triggerTime = (Int64(NSEC_PER_SEC) * 3)
+                                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, triggerTime), dispatch_get_main_queue(), { () -> Void in
+                                Helper.helper.switchToNavigationController()
+                                
+                                })
+                                    
                                 } else {
+                                    self.activityView.hidden = true
                                     print("Error in downloading image")
                                 }
                             }
@@ -90,7 +143,10 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
                         
                        
                     } else {
+                        self.activityView.hidden = true
                         print("user logged in earlier")
+                        Helper.helper.switchToNavigationController()
+                        
                     }
                 })
                 
@@ -98,10 +154,6 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
             print("user logged in with facebook with: ")
             print(user!.displayName!)
             print(user!.uid)
-            
-            self.ref.child("user_profile").child(user!.uid).child("name").setValue(user!.displayName!)
-            Helper.helper.switchToNavigationController()
-            
         })
     }
     
@@ -116,41 +168,6 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
     //////////////////////////////////
     
     
-    
-    /////////EMAIL SIGNIN/////////////
-    @IBAction func emailLoginAction(sender: AnyObject) {
-        print("Continue button tapped")
-        FIRAuth.auth()?.createUserWithEmail(emailField.text!, password: passwordField.text!, completion: {
-            user, error in
-            
-            if error != nil {
-                print("logged in")
-                Helper.helper.switchToNavigationController()
-            } else {
-                print("error")
-            }
-            
-            
-        })
-    }
-    
-    
-    func LoginWithEmail() {
-        FIRAuth.auth()?.signInWithEmail(emailField.text!, password: passwordField.text!, completion:
-            {
-                user, error in
-                
-                if error != nil {
-                    print("Incorrect")
-                } else {
-                    print("logged in")
-                    
-                }})
-    }
-    //////////////////////////////////
-    
-    
-    
     /////////GOOGLE SIGNIN////////////
     @IBAction func googleLogin(sender: AnyObject) {
         print("login google did tapped")
@@ -162,8 +179,49 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
             print(error!.localizedDescription)
             return
         }
+        self.activityView.hidden = false
         print(user.authentication)
         loginWithGoogle(user.authentication)
+        
+        if error == nil {
+            
+            let storage = FIRStorage.storage()
+            let storageRef = storage.referenceForURL("gs://missions-app.appspot.com")
+            let user = FIRAuth.auth()?.currentUser
+            
+            let profilePicRef = storageRef.child(user!.uid+"/profile_pic_small.jpg")
+            
+            let userId = user?.uid
+            
+            self.ref.child("user_profile").child(userId!).child("profile_pic_small").observeSingleEventOfType(.Value,withBlock: {(snapshot) in
+                let profile_pic = snapshot.value as? String?
+                
+                if(profile_pic == nil) {
+                    
+                    if let imageData = NSData(contentsOfURL: user!.photoURL!)
+                    {
+                        let uploadTask = profilePicRef.putData(imageData, metadata: nil) {
+                            metadata, error in
+                            if (error == nil)
+                            {
+                                let downloadURL = metadata!.downloadURL
+                                self.ref.child("user_profile").child("\(user!.uid)/profile_pic_small").setValue(downloadURL()!.absoluteString)
+                                self.ref.child("user_profile").child("\(user!.uid)/name").setValue(user?.displayName)
+                            } else {
+                                print("Error in downloading image")
+                            }
+                        }
+                    }
+                    
+                    
+                } else {
+                   
+                    print("user logged in earlier")
+                }
+            })
+            
+        }
+        self.activityView.hidden = true
     }
     
     func loginWithGoogle(authentification: GIDAuthentication) {
@@ -184,58 +242,8 @@ class SignInViewController: UIViewController,  GIDSignInUIDelegate, GIDSignInDel
     }
     //////////////////////////////////
     
+
     
-    
-    /////////KEYBOARD ACTION//////////
-    func keyboardWillShow(notification: NSNotification) {
-        
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if view.frame.origin.y == 0{
-                self.view.frame.origin.y -= keyboardSize.height
-            }
-            else {
-                
-            }
-        }
-        
-    }
-    func keyboardWillHide(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            if view.frame.origin.y != 0 {
-                self.view.frame.origin.y += keyboardSize.height
-            }
-            else {
-                
-            }
-        }
-    }
-    @IBAction func nameEdit(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-    }
-    @IBAction func mailEdit(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-    }
-    @IBAction func passwordEdit(sender: AnyObject) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
-    }
-    
-    func hideKeyboardWhenTappedAround() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SignInViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-        
-    }
-    //////////////////////////////////
-    
-    
-    func addCredentialToDatabase() {
-        ref = FIRDatabase.database().reference()
-    }
     
     
     @IBAction func dismiss(sender: UIButton) {

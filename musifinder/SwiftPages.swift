@@ -174,7 +174,7 @@ public class SwiftPages: UIView {
     
     public func initializeWithVCsInstanciatedArrayAndButtonTitlesArray(VCsArray: [UIViewController], buttonTitlesArray: [String]) {
         // Important - Titles Array must Have The Same Number Of Items As The viewControllerIDs Array
-        if VCsArray.count == buttonTitlesArray.count {
+        if VCsArray.count == 3 {
             viewControllersArray = VCsArray
             buttonTitles = buttonTitlesArray
             buttonsWithImages = false
@@ -185,10 +185,10 @@ public class SwiftPages: UIView {
     
     public func initializeWithVCsInstanciatedArrayAndButtonImagesArray(VCsArray: [UIViewController], buttonImagesArray: [UIImage]) {
         // Important - Titles Array must Have The Same Number Of Items As The viewControllerIDs Array
-        if VCsArray.count == buttonImagesArray.count {
+        if VCsArray.count == 3 {
             viewControllersArray = VCsArray
             buttonImages = buttonImagesArray
-            buttonsWithImages = true
+            buttonsWithImages = false
         } else {
             print("Initilization failed, the VC array count does not match the button titles array count.")
         }
@@ -196,7 +196,7 @@ public class SwiftPages: UIView {
     
     public func initializeWithVCIDsArrayAndButtonTitlesArray (VCIDsArray: [String], buttonTitlesArray: [String], storyBoardName: String = "Main") {
         // Important - Titles Array must Have The Same Number Of Items As The viewControllerIDs Array
-        if VCIDsArray.count == buttonTitlesArray.count {
+        if VCIDsArray.count == 3 {
             viewControllerIDs = VCIDsArray
             buttonTitles = buttonTitlesArray
             buttonsWithImages = false
@@ -208,10 +208,10 @@ public class SwiftPages: UIView {
     
     public func initializeWithVCIDsArrayAndButtonImagesArray (VCIDsArray: [String], buttonImagesArray: [UIImage], storyBoardName: String = "Main") {
         // Important - Images Array must Have The Same Number Of Items As The viewControllerIDs Array
-        if VCIDsArray.count == buttonImagesArray.count {
+        if VCIDsArray.count == 3 {
             viewControllerIDs = VCIDsArray
             buttonImages = buttonImagesArray
-            buttonsWithImages = true
+            buttonsWithImages = false
             self.storyBoardName = storyBoardName
         } else {
             print("Initilization failed, the VC ID array count does not match the button images array count.")
@@ -289,7 +289,6 @@ public class SwiftPages: UIView {
     // MARK: - Orientation Handling Functions -
     
     public func alignSubviews() {
-        
       
         animatedBar.frame.size = CGSize(width: (containerView.frame.size.width / (CGFloat)(pageCount)) * 0.8, height: animatedBarHeight)
         if barShadow {

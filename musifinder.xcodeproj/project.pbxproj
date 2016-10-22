@@ -14,7 +14,6 @@
 		38451BF31D929F88006CD9C3 /* SwiftPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38451BF21D929F88006CD9C3 /* SwiftPages.swift */; };
 		38451BF51D929FC0006CD9C3 /* FirstExampleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38451BF41D929FC0006CD9C3 /* FirstExampleVC.swift */; };
 		38451C111D92F7CD006CD9C3 /* RAReorderableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38451C101D92F7CD006CD9C3 /* RAReorderableLayout.swift */; };
-		38451C131D92F7D8006CD9C3 /* VerticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38451C121D92F7D8006CD9C3 /* VerticalViewController.swift */; };
 		38451C1E1D9332CF006CD9C3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38451C1D1D9332CF006CD9C3 /* HomeViewController.swift */; };
 		384AB3E81D91824E0099C0A4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384AB3E71D91824E0099C0A4 /* AppDelegate.swift */; };
 		384AB3EA1D91824E0099C0A4 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384AB3E91D91824E0099C0A4 /* Helper.swift */; };
@@ -32,8 +31,9 @@
 		384D9BF61DAD0B9A007AB531 /* ListIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 384D9BF11DAD0B9A007AB531 /* ListIcon.png */; };
 		384D9BF71DAD0B9A007AB531 /* LocationIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 384D9BF21DAD0B9A007AB531 /* LocationIcon.png */; };
 		384D9BF81DAD0B9A007AB531 /* StarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 384D9BF31DAD0B9A007AB531 /* StarIcon.png */; };
+		385B10E31DB2391C005DC010 /* GroupInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385B10E21DB2391C005DC010 /* GroupInfoViewController.swift */; };
+		385B10E51DB278AC005DC010 /* lastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385B10E41DB278AC005DC010 /* lastCell.swift */; };
 		38A54CC11DA8169400EEDEEB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A54CC01DA8169400EEDEEB /* User.swift */; };
-		38BD03771D9D1C3B00740878 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BD03761D9D1C3B00740878 /* SignUpViewController.swift */; };
 		38E8D72E1DA591F1003A5C94 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8D72D1DA591F1003A5C94 /* ProfileTableViewController.swift */; };
 		38E8D7301DA592BE003A5C94 /* TextInputTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8D72F1DA592BE003A5C94 /* TextInputTableView.swift */; };
 		38E8D7321DA65604003A5C94 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E8D7311DA65604003A5C94 /* GroupViewController.swift */; };
@@ -70,7 +70,6 @@
 		38451BF21D929F88006CD9C3 /* SwiftPages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftPages.swift; sourceTree = "<group>"; };
 		38451BF41D929FC0006CD9C3 /* FirstExampleVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstExampleVC.swift; sourceTree = "<group>"; };
 		38451C101D92F7CD006CD9C3 /* RAReorderableLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAReorderableLayout.swift; sourceTree = "<group>"; };
-		38451C121D92F7D8006CD9C3 /* VerticalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalViewController.swift; sourceTree = "<group>"; };
 		38451C1A1D932657006CD9C3 /* musifinder-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "musifinder-Bridging-Header.h"; sourceTree = "<group>"; };
 		38451C1D1D9332CF006CD9C3 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		384AB3E41D91824E0099C0A4 /* musifinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = musifinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,8 +93,9 @@
 		384D9BF11DAD0B9A007AB531 /* ListIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ListIcon.png; sourceTree = "<group>"; };
 		384D9BF21DAD0B9A007AB531 /* LocationIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LocationIcon.png; sourceTree = "<group>"; };
 		384D9BF31DAD0B9A007AB531 /* StarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StarIcon.png; sourceTree = "<group>"; };
+		385B10E21DB2391C005DC010 /* GroupInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupInfoViewController.swift; sourceTree = "<group>"; };
+		385B10E41DB278AC005DC010 /* lastCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = lastCell.swift; sourceTree = "<group>"; };
 		38A54CC01DA8169400EEDEEB /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		38BD03761D9D1C3B00740878 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		38E8D72D1DA591F1003A5C94 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
 		38E8D72F1DA592BE003A5C94 /* TextInputTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextInputTableView.swift; sourceTree = "<group>"; };
 		38E8D7311DA65604003A5C94 /* GroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
@@ -159,7 +159,6 @@
 				38451BF21D929F88006CD9C3 /* SwiftPages.swift */,
 				38451C1D1D9332CF006CD9C3 /* HomeViewController.swift */,
 				38451C101D92F7CD006CD9C3 /* RAReorderableLayout.swift */,
-				38451C121D92F7D8006CD9C3 /* VerticalViewController.swift */,
 				38451C1A1D932657006CD9C3 /* musifinder-Bridging-Header.h */,
 			);
 			name = AnimationViewController;
@@ -233,8 +232,10 @@
 			isa = PBXGroup;
 			children = (
 				384D9BD81DACFEA0007AB531 /* GUserCollectionViewCell.swift */,
+				385B10E41DB278AC005DC010 /* lastCell.swift */,
 				384D9BD61DACFC63007AB531 /* GroupUsersCollectionViewController.swift */,
 				38E8D7311DA65604003A5C94 /* GroupViewController.swift */,
+				385B10E21DB2391C005DC010 /* GroupInfoViewController.swift */,
 			);
 			name = Group;
 			sourceTree = "<group>";
@@ -245,7 +246,6 @@
 				381360EC1D97DD4000152559 /* AccountViewController.swift */,
 				38F633251D99746C00628544 /* FacebookViewController.swift */,
 				383969DC1D9C53CB00E61E21 /* SignInViewController.swift */,
-				38BD03761D9D1C3B00740878 /* SignUpViewController.swift */,
 				384AB4151D9182B80099C0A4 /* LoginViewController.swift */,
 				38A54CC01DA8169400EEDEEB /* User.swift */,
 				38E8D72D1DA591F1003A5C94 /* ProfileTableViewController.swift */,
@@ -553,7 +553,6 @@
 			files = (
 				38E8D7321DA65604003A5C94 /* GroupViewController.swift in Sources */,
 				38F633261D99746C00628544 /* FacebookViewController.swift in Sources */,
-				38451C131D92F7D8006CD9C3 /* VerticalViewController.swift in Sources */,
 				38451C111D92F7CD006CD9C3 /* RAReorderableLayout.swift in Sources */,
 				383969E11D9C5F5D00E61E21 /* CloseAnimation.swift in Sources */,
 				383969DD1D9C53CB00E61E21 /* SignInViewController.swift in Sources */,
@@ -561,9 +560,10 @@
 				38E8D72E1DA591F1003A5C94 /* ProfileTableViewController.swift in Sources */,
 				384AB4161D9182B80099C0A4 /* LoginViewController.swift in Sources */,
 				383969DF1D9C5C5E00E61E21 /* transitions.swift in Sources */,
+				385B10E51DB278AC005DC010 /* lastCell.swift in Sources */,
 				384AB3EA1D91824E0099C0A4 /* Helper.swift in Sources */,
 				384D9BD91DACFEA0007AB531 /* GUserCollectionViewCell.swift in Sources */,
-				38BD03771D9D1C3B00740878 /* SignUpViewController.swift in Sources */,
+				385B10E31DB2391C005DC010 /* GroupInfoViewController.swift in Sources */,
 				38451C1E1D9332CF006CD9C3 /* HomeViewController.swift in Sources */,
 				381360ED1D97DD4000152559 /* AccountViewController.swift in Sources */,
 				384AB4181D9182E30099C0A4 /* ChatViewController.swift in Sources */,
